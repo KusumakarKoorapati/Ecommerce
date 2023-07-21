@@ -1,0 +1,215 @@
+<%-include("../header")%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Add Type </h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">add type name</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">add type name</h3>
+                            </div>
+                            <!-- form start -->
+                            <form action="/admin/product/edit" enctype="multipart/form-data" method="post">
+                                <input type="hidden" name="eid" value="<%= data.id %>">
+                                <div class="card-body">
+                                    <!-- category -->
+                                    <div class="form-group">
+                                        <label>Select Category</label>
+                                        <select class="form-control" name="cat_id" id="category" onchange="get_sub()">
+                                            <option> --select category--</option>
+                                            <% category.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.cat_id==element.id){ %><%= 'selected' %><% } %>>
+                                                    <%= element.category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- sub category -->
+                                    <div class="form-group">
+                                        <label>Select Subcategory</label>
+                                        <select class="form-control" name="sub_id" id="sub_id" onchange="get_ex()">
+                                            <option> --select subcategory--</option>
+                                            <% sub.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.sub_id==element.id){ %><%= 'selected' %><% } %>>
+                                                    <%= element.sub_category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- extra category -->
+                                    <div class="form-group">
+                                        <label>Select Extra Category</label>
+                                        <select class="form-control" name="ex_id" id="ex_id"
+                                            onchange="get_type_brand()">
+                                            <option> --select extra category--</option>
+                                            <% ex.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.ex_id==element.id){ %><%= 'selected' %><% } %>>
+                                                    <%= element.extra_category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <div id="get_type_brand">
+                                        <!-- type  -->
+                                        <div class="form-group">
+                                            <label>Select Type</label>
+                                            <select class="form-control" name="type_id" id="type_id">
+                                                <option> --select type--</option>
+                                                <% type.forEach(element=> { %>
+                                                    <option value="<%= element.id  %>" <% if(data.type_id==element.id){ %><%= 'selected' %><% } %>>
+                                                        <%= element.type %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                        </div>
+                                        <!-- brand  -->
+                                        <div class="form-group">
+                                            <label>Select Brand</label>
+                                            <select class="form-control" name="brand_id" id="brand_id">
+                                                <option> --select Brand Name--</option>
+                                                <% brand.forEach(element=> { %>
+                                                    <option value="<%= element.id  %>" <% if(data.brand_id==element.id){ %><%= 'selected' %><% } %>>
+                                                        <%= element.brand %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                        </div>
+                                         <!-- size -->
+                                         <div class="form-group">
+                                            <label>Select Size</label>
+                                            <div class="select2-purple">
+                                              <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                                <option> --select size -- </option>
+                                                <%  size.forEach(element=> { %>
+                                                    <option value="<%= element  %>" <% if(data.size.includes(element)){ %><%= 'selected' %><% } %>>
+                                                        <%= element %>
+                                                    </option>
+                                                    <% }); %>
+                                              </select>
+                                            </div>
+                                          </div>
+                                        <!-- color -->
+                                        <div class="form-group">
+                                            <label>Select Color</label>
+                                            <div class="select2-purple">
+                                              <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                                <option> --select size -- </option>
+                                                <% color.forEach(element=> { %>
+                                                    <option value="<%= element %>" <% if(data.color.includes(element)){ %><%= 'selected' %><% } %>>
+                                                        <%= element %>
+                                                    </option>
+                                                    <% }); %>
+                                              </select>
+                                              </select>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <!-- Product name  -->
+                                    <div class="form-group">
+                                        <label for="f_name">Product Name</label>
+                                        <input type="text" name="name" class="form-control" id="f_name"
+                                            placeholder="Enter Product  Name" value="<%= data.name %>">
+                                    </div>
+                                    <!-- description -->
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" name="description" rows="3"
+                                            placeholder="product description ..."><%= data.description %></textarea>
+                                    </div>
+                                    <!--  Price -->
+                                    <div class="form-group">
+                                        <label for="f_name">Price</label>
+                                        <input type="number" name="price" class="form-control" id="f_name"
+                                            placeholder="Enter Price " value="<%= data.price %>">
+                                    </div>
+                                    <!-- Old Price -->
+                                    <div class="form-group">
+                                        <label for="f_name">Old Price</label>
+                                        <input type="number" name="old_price" class="form-control" id="f_name"
+                                            placeholder="Enter Old Price" value="<%= data.old_price %>">
+                                    </div>
+                                    <!-- discount -->
+                                    <div class="form-group">
+                                        <label for="f_name">Discount</label>
+                                        <input type="number" name="discount" class="form-control" id="f_name"
+                                            placeholder="Enter Discount % " value="<%= data.discount %>">
+                                    </div>
+
+                                    <!-- image -->
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Image</label>
+                                        <div class="d-flex align-items-center ">
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" name="image" class="custom-file-input"
+                                                        id="exampleInputFile">
+                                                    <label class="custom-file-label" for="exampleInputFile">Add
+                                                        Product
+                                                        Image</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+                                            </div>
+                                            <div class="image">
+                                                <img src="<%= data.image %>" height="100px" width="100px" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- mult_image -->
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Side Images</label>
+                                 
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="mul_image" class="custom-file-input"
+                                                    id="exampleInputFile" multiple>
+                                                <label class="custom-file-label" for="exampleInputFile">Add
+                                                    Side product
+                                                    Images</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                        <div class="image">
+                                            <% for(var i=0;i<data.mul_image.length;i++){ %>
+                                                <img src="<%= data.mul_image[i] %>" height="80px" width="80px" alt="">
+
+                                            <% } %>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+    </div>
+
+    <%-include("../footer")%>

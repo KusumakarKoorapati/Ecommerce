@@ -1,0 +1,119 @@
+<%-include('../header')%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Edit Brand </h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">edit brand name</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">edit brand name</h3>
+                            </div>
+                            <!-- form start -->
+                            <form action="/admin/brand/edit" method="post" enctype="multipart/form-data">
+                                <div class="card-body">
+                                    <!-- eid -->
+                                    <input type="hidden" name="eid" value="<%= data.id %>">
+                                    <!-- category -->
+                                    <div class="form-group">
+                                        <label>Select Category</label>
+                                        <select class="form-control" name="cat_id" id="category" onchange="get_sub()">
+                                            <option> --select category--</option>
+                                            <% category.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.cat_id==element.id) {%>
+                                                    <%= 'selected' %>
+                                                        <% } %>>
+                                                            <%= element.category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- sub category -->
+                                    <div class="form-group">
+                                        <label>Select Subcategory</label>
+                                        <select class="form-control" name="sub_id" id="sub_id" onchange="get_ex()">
+                                            <option> --select category--</option>
+                                            <% sub_cat_data.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.sub_id==element.id) {%>
+                                                    <%= 'selected' %>
+                                                        <% } %>>
+                                                            <%= element.sub_category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- extra category -->
+                                    <div class="form-group">
+                                        <label>Select Extra Category</label>
+                                        <select class="form-control" name="ex_id" id="ex_id">
+                                            <option> --select category--</option>
+                                            <% ex_cat_data.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.ex_id==element.id) {%>
+                                                    <%= 'selected' %>
+                                                        <% } %>>
+                                                            <%= element.extra_category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- brand name -->
+                                    <div class="form-group">
+                                        <label for="f_name">Brand Name</label>
+                                        <input type="text" name="brand" class="form-control" id="f_name"
+                                            placeholder="Enter Brand Name" value="<%= data.brand %>">
+                                    </div>
+                                    <!-- image -->
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="form-group">
+                                                <label for="exampleInputFile">Brand Logo</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="image" class="custom-file-input"
+                                                            id="exampleInputFile">
+                                                        <label class="custom-file-label" for="exampleInputFile">Add Brand
+                                                            Logo</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Upload</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <img src="<%= data.image %>" height="100" width="100" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </div>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+    </div>
+
+    <%-include('../footer')%>

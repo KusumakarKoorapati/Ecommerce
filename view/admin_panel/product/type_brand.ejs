@@ -1,0 +1,53 @@
+<!-- type  -->
+<div class="form-group">
+    <label>Select Type</label>
+    <select class="form-control" name="type_id" id="category">
+        <option> --select category--</option>
+        <% type_data.forEach(element=> { %>
+            <option value="<%= element.id  %>">
+                <%= element.type %>
+            </option>
+            <% }); %>
+    </select>
+</div>
+<!-- brand  -->
+<div class="form-group">
+    <label>Select Brand</label>
+    <select class="form-control" name="brand_id" id="category">
+        <option> --select brand--</option>
+        <% brand_data.forEach(element=> { %>
+            <option value="<%= element.id  %>">
+                <%= element.brand %>
+            </option>
+            <% }); %>
+    </select>
+</div>
+<!-- size -->
+    <div class="form-group">
+      <label>Select Size</label>
+      <div class="select2-purple">
+        <select class="select2" multiple="multiple" name="size" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+          <option>--select size --</option>
+          <% size.forEach(element=> { %>
+            <option value="<%= element %>">
+                <%= element %>
+            </option>
+            <% }); %>
+        </select>
+      </div>
+    </div>
+
+<!-- color -->
+<div class="form-group">
+    <label>Select  Color</label>
+    <div class="select2-purple">
+      <select class="select2" multiple="multiple" name="color" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
+        <option>--select Color--</option>
+        <% color.forEach(element=> { %>
+          <option value="<%= element %>">
+              <%= element %>
+          </option>
+          <% }); %>
+      </select>
+    </div>
+  </div>

@@ -1,0 +1,18 @@
+<form action="">
+    <div class="d-flex float-right align-items-center">
+        <% if(search){ %>
+        <label for="search mr-2"
+            style="margin-right: 8px;margin-bottom: 0 !important;">search: </label>
+        <input type="search" name="search" placeholder="Search Here ...."
+            class="form-control form-control-sm" value="<%= search  %>">
+        <a href="?"><i class="fa-regular fa-circle-xmark text-dark" style="font-size: 18px;margin-left: 5px;"></i></a>
+        <% }else{ %>
+            <label for="search mr-2"
+            style="margin-right: 8px;margin-bottom: 0 !important;">search: </label>
+        <input type="search" name="search" placeholder="Search Here ...."
+            class="form-control form-control-sm">
+        <label for="sub"><i class="fa-solid fa-magnifying-glass text-dark" style="font-size: 18px;margin-left: 5px;"></i></label>
+        <input type="submit" name="searching" id="sub" hidden>
+        <% } %>
+    </div>
+</form>

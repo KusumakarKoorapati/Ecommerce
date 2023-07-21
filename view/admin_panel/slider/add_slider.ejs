@@ -1,0 +1,113 @@
+<%-include("../header")%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Add Slider </h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">add slider</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- add admin  -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">add slider</h3>
+                            </div>
+                            <!-- form start -->
+                            <form action="/admin/slider/add" method="post" enctype="multipart/form-data">
+                                <div class="card-body">
+
+                                    <!-- category -->
+                                    <div class="form-group">
+                                        <label>Select Category</label>
+                                        <select class="form-control" name="cat_id" id="category" onchange="get_sub()">
+                                            <option> --select category--</option>
+                                            <% category.forEach(element=> { %>
+                                                <option value="<%= element.id  %>">
+                                                    <%= element.category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- sub category -->
+                                    <div class="form-group">
+                                        <label>Select Subcategory</label>
+                                        <select class="form-control" name="sub_id" id="sub_id" onchange="get_ex()">
+                                            <option> --select subcategory--</option>
+                                        </select>
+                                    </div>
+                                    <!-- extra category -->
+                                    <div class="form-group">
+                                        <label>Select Extra Category</label>
+                                        <select class="form-control" name="ex_id" id="ex_id" onchange="get_type_brand_slider()">
+                                            <option> --select extra category--</option>
+                                        </select>
+                                    </div>
+                                    <div class="" id="get_type_brand">
+                                        <!-- brand -->
+                                        <div class="form-group">
+                                            <label>Select Brand</label>
+                                            <select class="form-control" name="bran" id="brand_id">
+                                                <option> --select brand name--</option>
+                                            </select>
+                                        </div>
+                                          <!-- type -->
+                                          <div class="form-group">
+                                            <label>Select Type</label>
+                                            <select class="form-control" name="ex_id" id="type_id">
+                                                <option> --select type--</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                   <!-- product -->
+                                   <div class="form-group">
+                                    <label>Select Product</label>
+                                    <select class="form-control" name="product_id" id="pro_id">
+                                        <option> --select Product--</option>
+                                    </select>
+                                </div>
+                                    <!-- image -->
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Banner Image</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="slider_image" class="custom-file-input"
+                                                    id="exampleInputFile">
+                                                <label class="custom-file-label" for="exampleInputFile">
+                                                    Add Banner Image</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+    </div>
+
+    <%-include("../footer")%>

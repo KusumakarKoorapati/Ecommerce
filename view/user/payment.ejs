@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<title>Stripe Payment Demo</title>
+<body>
+    <h3>Welcome to Payment Gateway</h3>
+    <form action="/payment" method="POST">
+       <script
+          src="//checkout.stripe.com/v2/checkout.js"
+          class="stripe-button"
+          data-key="pk_test_51NWLAvSCbq47A1Wi8hsRb4elFXHXTl3OIlsvS8ug2UA6rQQEBrWhRooOJAKvCSQrLGhfhs1vlc08mu6fylgiGmCs008DTfDGwC"
+          data-amount="2500"
+          data-currency="inr"
+          data-name="<%= locals.user.name %>"
+          data-description="Handmade Art and Craft Products"
+          data-locale="auto" >
+        </script>
+    </form>
+</body>
+</html>

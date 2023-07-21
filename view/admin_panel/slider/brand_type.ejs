@@ -1,0 +1,25 @@
+
+<!-- brand  -->
+<div class="form-group">
+    <label>Select Brand</label>
+    <select class="form-control" name="brand_id" id="brand_id">
+        <option> --select brand--</option>
+        <% brand.forEach(element=> { %>
+            <option value="<%= element.id  %>">
+                <%= element.brand %>
+            </option>
+            <% }); %>
+    </select>
+</div>
+<!-- Product -->
+<div class="form-group">
+  <label>Select Type</label>
+  <select class="form-control" name="brand_id" id="type_id" onchange="get_product()">
+      <option> --select type--</option>
+      <% type.forEach(element=> { %>
+          <option value="<%= element.id  %>">
+              <%= element.type %>
+          </option>
+          <% }); %>
+  </select>
+</div>

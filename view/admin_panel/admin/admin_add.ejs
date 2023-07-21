@@ -1,0 +1,132 @@
+<%-include('../header')%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Add Admin</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Add Admin</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- add admin  -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Add Admin</h3>
+                            </div>
+                            <!-- form start -->
+                            <form action="/admin/add" method="post" enctype="multipart/form-data">
+                                <div class="card-body">
+                                    <!-- fname -->
+                                    <div class="form-group">
+                                        <label for="f_name">First Name</label>
+                                        <input type="text" name="fname" class="form-control" id="f_name"
+                                            placeholder="Enter First Name">
+                                    </div>
+                                    <!-- lname -->
+                                    <div class="form-group">
+                                        <label for="l_name">Last Name</label>
+                                        <input type="text" name="lname" class="form-control" id="l_name"
+                                            placeholder="Enter Last Name">
+                                    </div>
+                                    <!-- email -->
+                                    <% if(locals.flash.val_err && locals.flash.val_err.length> 0 ){ %>
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="inputError">Email</label>
+                                            <input type="text" name="email" class="form-control is-invalid"
+                                                id="inputError" placeholder="Enter Email ..." style="color: red;">
+                                            <p style="color:red;">
+                                                <%= locals.flash.val_err %>
+                                            </p>
+                                        </div>
+                                        <% }else{ %>
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input type="email" name="email" class="form-control" id="email"
+                                                    placeholder="Enter Email...">
+                                            </div>
+                                            <% } %>
+
+                                    <!-- password -->
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" name="password" class="form-control"
+                                            id="exampleInputPassword1" placeholder="Password">
+                                    </div>
+                                    <!-- city -->
+                                    <div class="form-group">
+                                        <% var city=['surat','rajakot','bharuch','amadabad'] %>
+                                            <label>City</label>
+                                            <select class="form-control" name="city">
+                                                <option> -- select city --</option>
+                                                <% city.forEach(element=> {%>
+                                                    <option value="<%= element  %>">
+                                                        <%= element %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                    </div>
+                                    <!-- company -->
+                                    <div class="form-group">
+                                        <label for="l_name">Company Name</label>
+                                        <input type="text" name="company" class="form-control" id="l_name"
+                                            placeholder="Enter Company Name">
+                                    </div>
+                                    <!-- description -->
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" name="description" rows="3"
+                                            placeholder="Some Thing About Your Company..."></textarea>
+                                    </div>
+                                    <!-- product type -->
+                                    <div class="form-group">
+                                        <label>What You Sale</label>
+                                        <textarea class="form-control" name="product_type" rows="3"
+                                            placeholder="Add Your product type like : cloth,cloth etc..."></textarea>
+                                    </div>
+                                    <!-- image -->
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Profile</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="image" class="custom-file-input"
+                                                    id="exampleInputFile">
+                                                <label class="custom-file-label" for="exampleInputFile">Add
+                                                    Profile
+                                                    Image</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- form end -->
+                </div>
+            </div>
+    </div>
+    </div>
+    </section>
+    </div>
+
+    <%-include('../footer')%>

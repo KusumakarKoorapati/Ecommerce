@@ -1,0 +1,89 @@
+<%-include('../header')%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Add Type </h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">add type name</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">add type name</h3>
+                            </div>
+                            <!-- form start -->
+                            <form action="/admin/type/edit" method="post">
+                                <input type="hidden" name="eid" value="<%= data.id %>">
+                                <div class="card-body">
+                                    <!-- category -->
+                                    <div class="form-group">
+                                        <label>Select Category</label>
+                                        <select class="form-control" name="cat_id" id="category" onchange="get_sub()">
+                                            <option> --select category--</option>
+                                            <% category.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.cat_id==element.id){ %><%= 'selected' %><% } %>>
+                                                    <%= element.category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- sub category -->
+                                    <div class="form-group">
+                                        <label>Select Subcategory</label>
+                                        <select class="form-control" name="sub_id" id="sub_id" onchange="get_ex()">
+                                            <option> --select subcategory--</option>
+                                            <% sub_data.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.sub_id==element.id){ %><%= 'selected' %><% } %>>
+                                                    <%= element.sub_category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- extra category -->
+                                    <div class="form-group">
+                                        <label>Select Extra Category</label>
+                                        <select class="form-control" name="ex_id" id="ex_id">
+                                            <option> --select extra category--</option>
+                                            <% ex_data.forEach(element=> { %>
+                                                <option value="<%= element.id  %>" <% if(data.ex_id==element.id){ %><%= 'selected' %><% } %>>
+                                                    <%= element.extra_category %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <!-- type name -->
+                                    <div class="form-group">
+                                        <label for="f_name">Type Name</label>
+                                        <input type="text" name="type" class="form-control" id="f_name"
+                                            placeholder="Enter type Name" value="<%= data.type %>">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+    </div>
+
+    <%-include('../footer')%>

@@ -1,0 +1,242 @@
+<%-include('user_header') %>
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Checkout</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 align-items-center">
+            <!-- form -->
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
+                    <form action="/add_address" method="post">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="text" name="mo_no" placeholder="+123 456 789">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Address</label>
+                                <textarea class="form-control" name="address" placeholder="123 Street"> </textarea>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>village/city</label>
+                                <input class="form-control" type="text" name="village" placeholder="123 Street">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Country</label>
+                                <select class="custom-select" name="country">
+                                    <option selected>United States</option>
+                                    <option>Afghanistan</option>
+                                    <option>Albania</option>
+                                    <option>Algeria</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>City</label>
+                                <input class="form-control" type="text" name="city" placeholder="New York">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>State</label>
+                                <input class="form-control" type="text" name="state" placeholder="New York">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>ZIP Code</label>
+                                <input class="form-control" type="number" name="zip" placeholder="123">
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn  btn-block btn-primary font-weight-bold my-3 py-3">Add
+                                    Address</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- bil -->
+            <div class="col-lg-4">
+                <!-- order list -->
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Products</h5>
+                        <% var sum=0;var pro_id=[] ; for (const pd of cart_data) {%>
+                            <div class="d-flex justify-content-between">
+                                <p>
+                                    <%= pd.product_id.name %>
+                                </p>
+                                <p>
+                                    <%= pd.product_id.price %>
+                                </p>
+                            </div > <% sum+=(pd.product_id.price*pd.quantity);pro_id.push(pd.product_id.id) } %> 
+                            <!-- shipping cost -->
+                            <hr class="mt-0">
+                            <div class="d-flex justify-content-between mb-3 pt-1">
+                                <h6 class="font-weight-medium">Subtotal</h6>
+                                <h6 class="font-weight-medium">$150</h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6 class="font-weight-medium">Shipping</h6>
+                                <h6 class="font-weight-medium">$10</h6>
+                            </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Total</h5>
+                            <h5 class="font-weight-bold">₹<%= sum+100 %>
+                            </h5>
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3 "
+                                data-bs-toggle="modal" data-bs-target="#payment">Place Order</button>
+                            <!-- log_in model -->
+                            <form action="/payment" method="post">
+                                <input type="checkbox" value="<%= pro_id %>" checked name="product_id" hidden>
+                                <input type="hidden" value="<%= sum+100 %>" name="amount">
+                                <div class="modal  fade" id="payment" data-bs-backdrop="static" data-bs-keyboard="false"
+                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-centered  ">
+                                        <div class="modal-content p-3">
+
+                                            <div class="modal-header">
+                                                <h2 class="modal-title fs-5" id="staticBackdropLabel">Payment</h2>
+                                                <button type="button" class="btn" data-bs-dismiss="modal"
+                                                    aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                                            </div>
+
+                                            <div class="row">
+                                                <%var i=0; for (const ad of address) {%>
+                                                    <div class="col-lg-3">
+                                                        <label for="add<%= i %>" id="lab_ad<%= i  %>">
+                                                            <div class="address">
+                                                                <h6>
+                                                                    <%= ad.user_id.name %>
+                                                                </h6>
+                                                                <p>
+                                                                    <%= ad.address %>
+                                                                </p>
+                                                                <ul class="m-0">
+                                                                    <li><i class="fa-solid fa-phone "
+                                                                            title="mobile number"
+                                                                            style="margin-right:5px ;"></i>
+                                                                        <%= ad.mo_no %>
+                                                                    </li>
+                                                                    <li><i class="fa-solid fa-city" title="city"
+                                                                            style="margin-right:5px ;"></i>
+                                                                        <%= ad.city %>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </label>
+                                                        <input type="radio" name="address_id" id="add<%=i  %>"
+                                                            value="<%= ad.id %>" onchange="add_cl(<%=i%>)"
+                                                            hidden>
+                                                    </div>
+                                                    <% i++} %>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <div class=" form-group">
+                                                    <label>Card Number</label>
+                                                    <input class="form-control" name="card_num" type="tel"
+                                                        placeholder="0000 0000 0000 0000 " id="car_num"
+                                                        onkeyup="num_space()"
+                                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                        maxlength="19"
+                                                        autocomplete="off">
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class=" form-group">
+                                                            <label>Expire Date</label>
+
+                                                            <div class="form-control">
+                                                                <input type="number" name="mon" placeholder="MM" id="month" min="1"
+                                                                max="12" maxlength=2  style="border: none; outline: none;"  autocomplete="off"
+                                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                /> /
+                                                            <input type="year" name="year" placeholder="YY" id="year"
+                                                                maxlength=2  style="border: none;outline: none;" autocomplete="off"
+                                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class=" form-group">
+                                                            <label>CVV Code</label>
+                                                            <input class="form-control" name="cvv" type="number"
+                                                                maxlength=3  autocomplete="off"
+                                                                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>  
+                                                <button type="submit" class="btn btn-primary">Place</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- /log_id model -->
+                        </div>
+                    </div>
+                
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout End -->
+
+
+    <%- include('user_footer') %>
+        <script>
+            //card_space
+            function num_space() {
+                let a = $("#car_num").val();
+                let l = a.length;
+                if (l <= 19 && (l == 4 || l == 9 || l == 14)) {
+                    a += " ";
+                    $("#car_num").val(a)
+                } else if (l > 19) {
+                    let x = a.slice(0, 19);
+                    $("#car_num").val(x)
+                }
+
+            }
+            // address 
+            function add_cl(i) {
+                $('#lab_ad' + i + " div").toggleClass('add_active');
+            }
+            // /address
+
+            let cl = ["btn", "btn-block", "btn-primary", "font-weight-bold", "my-3", "py-3"];
+            document.querySelector("button.stripe-button-el").classList.add(...cl);
+            document.querySelector("button.stripe-button-el span").removeAttribute("style");
+            document.querySelector("button.stripe-button-el span").innerHTML = "Place Order";
+            document.querySelector("button.stripe-button-el").classList.remove("stripe-button-el");
+        </script>

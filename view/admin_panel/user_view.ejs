@@ -1,0 +1,126 @@
+<%- include('header') %>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>All Admins</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Admin</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card" style="padding: 20px;">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <%- include('search') %>
+                        </div>
+                        <div class="col-12">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form action="/admin/mul_del_user" method="post">
+                                    <table id="example1" class="data-table table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="d-flex align-items-center">
+                                                    <input type="checkbox" name="mulDel"
+                                                        style="height: 18px;width: 18px; margin-right: 5px;"
+                                                        id="multi_delete">
+                                                    Name
+                                                    <label for="del" style="margin: 0 0 0 8px; cursor: pointer;"><i
+                                                            class="fa-solid fa-trash-can"></i></label>
+                                                    <input type="submit" id="del" hidden>
+                                                </th>
+                                                <th>Email</th>
+                                                <th>Log In On</th>
+                                                <th>Operation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for (const us of data ) {%>
+                                                <tr>
+                                                    <td
+                                                        style="text-align: center;">
+                                                       <div class="d-flex justify-content-around align-items-center">
+                                                        <input type="checkbox" class="align-self-left singleDelet"
+                                                        style="height: 15px;width: 15px; margin-right: 5px;"
+                                                        name="mulDel[]" value="<%= us.id %>">
+                                                    <p style="margin: 0;">
+                                                        <%= us.name %>
+                                                    </p>
+                                                       </div>
+                                                    </td>
+                                                    <td>
+                                                        <%= us.email %>
+                                                    </td>
+                                                    <td>
+                                                        <%= us.createAt %>
+                                                    </td>
+                                                    <td style="vertical-align: middle; text-align: center;">
+                                                        <a href="/admin/delete_user/<%= us.id %>" class="text-dark "
+                                                            style="font-size: 20px; margin-right: 8px;"><i
+                                                                class="fa-solid fa-trash"></i></a>
+                                                        <% if(us.active){ %>
+                                                            <a href="?status=Active&id=<%= us.id %>" class="text-dark "
+                                                                style="font-size: 20px; margin-right: 8px;"><i
+                                                                    class="fa-solid fa-circle-check"
+                                                                    style="color: rgb(0, 182, 0);"></i></a>
+                                                            <% }else{ %>
+                                                                <a href="?status=deActive&id=<%= us.id %>"
+                                                                    class="text-dark "
+                                                                    style="font-size: 20px; margin-right: 8px;"><i
+                                                                        class="fa-regular fa-circle-check"
+                                                                        style="color: red"></i></a>
+                                                                <% } %>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Log In On </th>
+                                                <th>Operation</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </form>
+                            </div>
+                            <div class="card-footer clearfix">
+                                <ul class="pagination pagination-sm m-0 float-right">
+                                    <% var page_c=page; var pre=--page; %>
+                                        <% if(pre>0){ %>
+                                            <li class="page-item"><a href="?page=<%= pre %>&search=<%= search %>"
+                                                    class="page-link" href="#">&laquo;</a></li>
+                                            <% } %>
+                                                <% for (let p=1; p <=count; p++) { %>
+                                                    <li class="page-item"><a class="page-link"
+                                                            href="?page=<%= p %>&search=<%= search %>">
+                                                            <%= p %>
+                                                        </a></li>
+                                                    <% } %>
+                                                        <% var next=++page_c %>
+                                                            <% if(next<=count){ %>
+                                                                <li class="page-item"><a
+                                                                        href="?page=<%= next %>&search=<%= search %>"
+                                                                        class="page-link" href="#">&raquo;</a></li>
+                                                                <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <%- include('footer') %>

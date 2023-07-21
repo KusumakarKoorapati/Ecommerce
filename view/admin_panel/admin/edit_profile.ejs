@@ -1,0 +1,123 @@
+<%- include('../header') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Edit Profile</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Edit Profile</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- add profile  -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Edit profile</h3>
+                            </div>
+                            <!-- form start -->
+                            <form action="/admin/edit_profile" method="post" enctype="multipart/form-data">
+                                <div class="card-body">
+                                    <!-- eid -->
+                                    <input type="hidden" name="eid" value="<%= data.id %>">
+                                    <!-- fname -->
+                                    <div class="form-group">
+                                        <label for="f_name">First Name</label>
+                                        <% let nam=data.name.split(" ") %>
+                                        <input type=" text" name="fname" class="form-control" id="f_name"
+                                            placeholder="Enter First Name" value="<%= nam[0] %>">
+                                    </div>
+                                    <!-- lname -->
+                                    <div class="form-group">
+                                        <label for="l_name">Last Name</label>
+                                        <input type="text" name="lname" class="form-control" id="l_name"
+                                            placeholder="Enter First Name" value="<%= nam[1] %>">
+                                    </div>
+                                    <!-- email -->
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" class="form-control" id="email"
+                                            placeholder="Enter Email..." value="<%= data.email %>">
+                                    </div>
+                                    <!-- city -->
+                                    <div class="form-group">
+                                        <% var city=['surat','rajakot','bharuch','amadabad'] %>
+                                            <label>City</label>
+                                            <select class="form-control" name="city">
+                                                <option> -- select city --</option>
+                                                <% city.forEach(element=> {%>
+                                                    <option value="<%= element  %>" <% if(data.city==element) {%>
+                                                        <%= 'selected' %>
+                                                            <% } %>><%= element %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                    </div>
+                                    <!-- company -->
+                                    <div class="form-group">
+                                        <label for="l_name">Company Name</label>
+                                        <input type="text" name="company" class="form-control" id="l_name"
+                                            placeholder="Enter Company Name" value="<%= data.company%>">
+                                    </div>
+                                    <!-- description -->
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" name="description" rows="3"
+                                            placeholder="Some Thing About Your Company..."><%= data.description%></textarea>
+                                    </div>
+                                    <!-- product type -->
+                                    <div class="form-group">
+                                        <label>What You Sale</label>
+                                        <textarea class="form-control" name="product_type" rows="3"
+                                            placeholder="Add Your product type like : cloth,cloth etc..."><%= data.product_type%></textarea>
+                                    </div>
+                                    <!-- image -->
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Profile</label>
+                                        <div class="row align-items-center">
+                                            <div class="col-8 d-flex">
+                                                <div class="input-group ">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="image" class="custom-file-input"
+                                                            id="exampleInputFile">
+                                                        <label class="custom-file-label" for="exampleInputFile">Add Profile
+                                                            Image</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Upload</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <img src="<%= data.image %>" alt=""
+                                                    style="height: 80px; width: 80px; object-fit: cover;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </div>
+                            </form>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <%- include('../footer') %>
